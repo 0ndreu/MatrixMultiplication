@@ -6,7 +6,7 @@ import (
 )
 
 func main() {
-	n := 2
+	n := 10
 	matrix1 := make([][]int, n)
 	matrix2 := make([][]int, n)
 	sum := make([][]int, n)
@@ -21,8 +21,13 @@ func main() {
 		go multiple(matrix1, matrix2, sum, n, i)
 	}
 	fmt.Println(matrix1)
-	fmt.Println(matrix2)
-	fmt.Println(sum)
+	// fmt.Println(matrix2)
+	// fmt.Println(sum)
+	outputMatrix(matrix1, n)
+	fmt.Print("\n\n")
+	outputMatrix(matrix2, n)
+	fmt.Print("\n\n")
+	outputMatrix(sum, n)
 
 }
 
@@ -37,6 +42,17 @@ func fillMatrix(matrix [][]int) {
 
 func multiple(matrix1, matrix2, sum [][]int, n int, i int) {
 	for j := 0; j < n; j++ {
-		sum[i][j] += matrix1[i][j] * matrix2[j][i]
+		for k := 0; k < n; k++ {
+			sum[i][j] += matrix1[i][k] * matrix2[k][j]
+		}
+	}
+}
+
+func outputMatrix(matrix [][]int, n int) {
+	for i := 0; i < n; i++ {
+		for j := 0; j < n; j++ {
+			fmt.Printf("%d ", matrix[i][j])
+		}
+		fmt.Println()
 	}
 }
